@@ -1,3 +1,5 @@
+"use strict";
+
 /**
  * Logger Utility
  * @see - https://github.com/winstonjs/winston
