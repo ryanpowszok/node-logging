@@ -27,11 +27,19 @@ const logDir = './logs';
 
 // Logger placeholder function
 let logger = {
-  debug: console.log
+  emerg: console.log,
+  alert: console.log,
+  crit: console.log,
+  error: console.log,
+  warning: console.log,
+  notice: console.log,
+  info: console.log,
+  debug: console.log,
+  silly: console.log
 };
 
 // Setup Winston Logging, similar to error logs and access logs
-if( app.get('logLevel') !== false && app.get('logLevel') !== 'none' ) {
+if( !app.get('loggerDisabled') ) {
 
   // Set Winston Configs
   winston.emitErrs = true;
@@ -46,7 +54,7 @@ if( app.get('logLevel') !== false && app.get('logLevel') !== 'none' ) {
   logger = new (winston.Logger)({
     transports: [
       new (winston.transports.Console)({
-        level: (app.get('env') === 'development' ? 'debug' : 'info'),
+        level: process.env.LOGGER_LOGLEVEL || (app.get('env') === 'development' ? 'debug' : 'info'),
         timestamp: tsFormat,
         colorize: true,
         handleExceptions: true,
@@ -59,13 +67,16 @@ if( app.get('logLevel') !== false && app.get('logLevel') !== 'none' ) {
         maxsize: 1024000,
         maxFiles: 10,
         tailable: true,
-        handleExceptions: false,
+        handleExceptions: true,
+        exitOnError: false,
         json: true,
         colorize: false
       })
     ],
     exitOnError: false
   });
+
+  winston.config.syslog.levels.silly = 10;
 
   // Use syslog type errors, instead of default winston errors
   logger.setLevels(winston.config.syslog.levels);
@@ -76,6 +87,28 @@ if( app.get('logLevel') !== false && app.get('logLevel') !== 'none' ) {
       // @todo - Email Sysadmin
     }
   });
+
+  // Overwrite default console functions
+  function formatArgs(args){
+    return [util.format.apply(util.format, Array.prototype.slice.call(args))];
+  }
+
+  console.log = function(){
+      logger.debug.apply(logger, formatArgs(arguments));
+  };
+  console.info = function(){
+      logger.info.apply(logger, formatArgs(arguments));
+  };
+  console.warn = function(){
+      logger.warn.apply(logger, formatArgs(arguments));
+  };
+  console.error = function(){
+      logger.error.apply(logger, formatArgs(arguments));
+  };
+  console.debug = function(){
+      logger.debug.apply(logger, formatArgs(arguments));
+  };
+
 }
 
 module.exports = logger;
