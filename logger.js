@@ -58,7 +58,8 @@ if( !app.get('loggerDisabled') ) {
         timestamp: tsFormat,
         colorize: true,
         handleExceptions: true,
-        json: false
+        json: false,
+        stderrLevels: ['error', 'crit', 'alert', 'emerg']
       }),
       new (winston.transports.File)({
         filename: logDir + '/error_log.log',
