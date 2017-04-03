@@ -1,4 +1,12 @@
-# node-logging
+Node Logging
+============================
+
+Easy logger file for setting up node logging with Winston JS
+
+* Version: 1.0.0
+* Developer: Ryan Powszok
+* Website: [http://jukelabs.com](http://jukelabs.com)
+* Copyright: (c) 2016 Ryan Powszok / Juke Labs, Inc.
 
 License
 -------------------------------------
@@ -23,4 +31,3 @@ Released under the MIT License: [http://www.opensource.org/licenses/mit-license.
 	NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, 
 	DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, 
 	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.	
-	
