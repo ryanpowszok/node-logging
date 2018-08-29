@@ -1,14 +1,12 @@
 Node Logging
 ============================
 
+Easy logger file for setting up node logging with Winston JS
+
 * Version: 1.0.0
 * Developer: Ryan Powszok
 * Website: [https://ryanpowszok.com](https://ryanpowszok.com)
 * Copyright: (c) 2018 Ryan Powszok / Juke Labs, Inc.
-
-## Introduction
-
-Easy logger file for setting up node logging with Winston JS
 
 License
 -------------------------------------
